@@ -1,0 +1,12 @@
+[workspace]
+authors = ["guanboch <guanbo.usc@gmail.com>"]
+channels = ["conda-forge"]
+name = "DSA_course"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "3.13.*"
+matplotlib = ">=3.10.8,<4"
