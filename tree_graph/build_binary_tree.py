@@ -27,12 +27,13 @@ def buildTreeFromList(arr):
       queue.append(node.left)
     i = i + 1 
 
-    if arr[i] != None and i < len(arr):
+    if i< len(arr) and arr[i] != None:
       node.right = treeNode(arr[i])
       queue.append(node.right)
     i = i + 1
 
   return root
+
 
 
 arr=[1,2,3,None,4,5,6,7,None]
