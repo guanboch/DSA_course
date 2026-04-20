@@ -40,12 +40,12 @@ def min_depth_tree(root):
     while queue:
         for _ in range(len(queue)):
             node = queue.popleft()
-            if not node:
-                continue
             if node.left == None and node.right == None:
                 return i
-            queue.append(node.left)
-            queue.append(node.right)
+            if node.left != None:
+                queue.append(node.left)
+            if node.right != None:
+                queue.append(node.right)
 
         i = i + 1
            
