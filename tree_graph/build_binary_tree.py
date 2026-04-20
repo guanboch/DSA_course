@@ -20,14 +20,14 @@ def buildTreeFromList(arr):
 
   i = 1
   while queue and i < len(arr):
-    node = queue.popleft()
+    node = queue.popleft()      
 
-    if arr[i] != None:
+    if arr[i] != None:     #otherwise node.left is default to be none
       node.left = treeNode(arr[i])
       queue.append(node.left)
     i = i + 1 
 
-    if i< len(arr) and arr[i] != None:
+    if i< len(arr) and arr[i] != None: #ensure arr[i] is accesible. check if node.right's null value need to be changed
       node.right = treeNode(arr[i])
       queue.append(node.right)
     i = i + 1
