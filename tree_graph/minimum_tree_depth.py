@@ -11,7 +11,7 @@ def build_tree_list(arr):
     if not arr:
         return None
     root = binaryTreeNode(arr[0])
-    queue = deque(root)
+    queue = deque([root])
     i = 1
     while queue and i < len(arr):
         node = queue.popleft()
@@ -29,3 +29,34 @@ def build_tree_list(arr):
     return root 
 
         
+
+# %%
+def min_depth_tree(root):
+    if root == None:
+        return
+    queue = deque([root])
+
+    i = 1
+    while queue:
+        for _ in range(len(queue)):
+            node = queue.popleft()
+            if not node:
+                continue
+            if node.left == None and node.right == None:
+                return i
+            queue.append(node.left)
+            queue.append(node.right)
+
+        i = i + 1
+           
+                
+    return i
+
+
+
+# %%
+a = [1,2,3,4,5]
+root = build_tree_list(a)
+min_depth = min_depth_tree(root)
+print(min_depth)
+# %%
