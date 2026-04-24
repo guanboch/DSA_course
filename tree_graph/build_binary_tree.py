@@ -36,9 +36,7 @@ def buildTreeFromList(arr):
 
 
 
-arr=[1,2,3,None,4,5,6,7,None]
 
-tree = buildTreeFromList(arr)
 
 def depth_first(node):
   if node == None:
@@ -50,7 +48,6 @@ def depth_first(node):
   return
 
 
-depth_first(tree)
 
 def max_depth(node) -> int:
   if node == None:
@@ -61,7 +58,6 @@ def max_depth(node) -> int:
 
   return max(left, right) + 1 
 
-max_depth(tree)
 
 def target_sum(node, cur, target) -> bool:
   if node == None:
@@ -76,10 +72,14 @@ def target_sum(node, cur, target) -> bool:
 
 
 # %%
- 
+if __name__=='__main__':
+  arr=[1,2,3,None,4,5,6,7,None]
 
-    
+  tree = buildTreeFromList(arr)
+      
+  depth_first(tree)
 
+  max_depth(tree)
 
 
 
