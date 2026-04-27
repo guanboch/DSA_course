@@ -1,6 +1,12 @@
+'''
+Given the root of a binary tree, find the maximum value v for which there exist different nodes a and b where v = |a.val - b.val| and a is an ancestor of b.
+A node a is an ancestor of b if either: any child of a is equal to b or any child of a is an ancestor of b.
+'''
+
+
 from build_binary_tree import buildTreeFromList
 
-class Solution:
+class Solution:    # bottom up approach
     def max_diff_node_ancester(self, root):
         def dfs(node):
             if not node:
@@ -13,18 +19,31 @@ class Solution:
             cur_max = max(node.val, lmax, rmax)
             cur_min = min(node.val, lmin, rmin)
 
-            # max diff with current node as the ancestor
-            cur_diff = max(
-                node.val - min(lmin, rmin),   # node is larger than some descendant
-                max(lmax, rmax) - node.val,   # node is smaller than some descendant
-                0                             # clamps -inf results when a child is None
-            )
+            # cur_max/cur_min already include node.val, so both terms are >= 0
+            cur_diff = max(cur_max - node.val, node.val - cur_min)
 
             return cur_max, cur_min, max(ldiff, rdiff, cur_diff)
 
         return dfs(root)[2]
     
-    
+class Solution_top_down:
+    # hybrid: top-down state passing + bottom-up result aggregation
+    # top-down (pre-order): cur_min/cur_max are updated before recursing,
+    #   so each call receives the running min/max of all its ancestors
+    # bottom-up (post-order): return value max(left, right) propagates upward
+    #   after both children return, collecting the best diff across all paths
+    def max_diff_node_ancester(self, root):
+        def dfs(node, cur_min, cur_max):
+            if not node:
+                return cur_max - cur_min
+            cur_min = min(cur_min, node.val)
+            cur_max = max(cur_max, node.val)
+            return max(dfs(node.left, cur_min, cur_max),
+                       dfs(node.right, cur_min, cur_max))
+
+
+        return dfs(root, root.val, root.val)
+
 
 # %%
 root = [8,3,10,1,6,None,14,None,None,4,7,13]
