@@ -7,7 +7,7 @@ class treeNode:
   def get_val(self):
     return self.val
 
-class BinarySearhTree:
+class BinarySearchTree:
     def __init__(self):
         self.root = None
 
@@ -19,16 +19,17 @@ class BinarySearhTree:
 
 
     def _insert_recursive(self,cur_node, key):
-            if key <= cur_node.val:
-                if cur_node.left != None:
-                    self._insert_recursive(cur_node.left, key)
+            if key:
+                if key <= cur_node.val:
+                    if cur_node.left != None:
+                        self._insert_recursive(cur_node.left, key)
+                    else:
+                        cur_node.left = treeNode(key)
                 else:
-                    cur_node.left = treeNode(key)
-            else:
-                if cur_node.right != None:
-                    self._insert_recursive(cur_node.right, key)
-                else:
-                    cur_node.right = treeNode(key)
+                    if cur_node.right != None:
+                        self._insert_recursive(cur_node.right, key)
+                    else:
+                        cur_node.right = treeNode(key)
 
 
     def inorder_traversal(self, node, result):
@@ -42,6 +43,9 @@ class BinarySearhTree:
             self.inorder_traversal(node.right,result)
 
         return
+    
+    def get_node(self):
+        return self.root
 
 # %%
 
